@@ -6,6 +6,9 @@
 #include "GameFramework/Character.h"
 #include "SCharacter.generated.h"
 
+class USpringArmComponent;
+class UCameraComponent;
+
 UCLASS()
 class ACTIONROGUELIKE_API ASCharacter : public ACharacter
 {
@@ -16,13 +19,23 @@ public:
 	ASCharacter();
 
 protected:
+
+	// unreal macros 
+	UPROPERTY(VisibleAnywhere)
+	USpringArmComponent* SpringArmComp;
+	
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* CameraComp;
+	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	void MoveForward(float Value);
+	
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
